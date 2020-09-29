@@ -25,6 +25,7 @@ function createWindow() {
  
 /* On attend qu'Electron.js soit prêt pour créer la fenêtre */
 electron.app.on('ready', function () {
+
     app.start(function () {
         createWindow();
     });

@@ -1,10 +1,22 @@
 /* Appel de tous nos outils */
 const express = require('express');
-const expressApp = express();
-const http = require('http').Server(expressApp);
+const app = express();
+const http = require('http').Server(app);
  
 const path = require('path');
+const indexRouter = require('./routes/index');
+
+    // EJS comme moteur de template 
+    app.set('view engine', 'ejs');
  
+    //nos fichiers côté client 
+    app.use(express.static(path.join(__dirname, 'public')));
+     
+    //views est défini comme notre dossier de vues par défaut 
+    app.set('views', path.join(__dirname, '/views/'));
+
+    app.use('/', indexRouter);
+    
 /* Initialisation des variables */
 const router = {
     isStarted: false
@@ -33,29 +45,29 @@ function start(callback) {
 }
  
 function init(callback) {
-    /* On s'assure que le serveur n'est vraiment pas démarré */
+    //On s'assure que le serveur n'est vraiment pas démarré 
     router.isStarted = false;
  
-    /* J'utilise ici EJS comme moteur de template */
-    expressApp.set('view engine', 'ejs');
+    //J'utilise ici EJS comme moteur de template 
+    app.set('view engine', 'ejs');
  
-    /* assets sera le répertoire où se trouverons nos fichiers côté client */
-    expressApp.use(express.static(path.join(__dirname, 'assets')));
+    //assets sera le répertoire où se trouverons nos fichiers côté client 
+    app.use(express.static(path.join(__dirname, 'public')));
      
-    /* views est défini comme notre dossier de vues par défaut */
-    expressApp.set('views', path.join(__dirname, '/views/'));
+    //views est défini comme notre dossier de vues par défaut 
+    app.set('views', path.join(__dirname, '/views/'));
  
     if (typeof callback != 'undefined') {
         callback();
     }
 }
  
-/* ROUTES */
+//ROUTES 
  
 function loadRoutes(callback) {
-    expressApp.get('/', function (req, res) {
-        res.render('index',{title :'rxpres welcome'});
-    });
+    // app.get('/', function (req, res) {
+    //     res.render('index',{title :'rxpres welcome'});
+    // });
  
     if (typeof callback != 'undefined') {
         callback();
