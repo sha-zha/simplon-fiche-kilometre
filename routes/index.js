@@ -4,10 +4,10 @@ const expressApp  = express();
 const http        = require('http').Server(expressApp);
 var router = express.Router();
 const sqlite3 = require("sqlite3").verbose();
+
 //controllers
 const individuController = require('../controllers/individuController');
 const raisonController = require('../controllers/raisonController');
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,4 +25,7 @@ router.get('/update/:id',raisonController.update)
 
 // update raison
 router.post('/updateRaison/:id', raisonController.updateRaison)
+
+//affiche form pour ajouter une entite
+// router.get('/entite', entiteController.add)
 module.exports = router;

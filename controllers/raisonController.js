@@ -1,16 +1,8 @@
 const path        = require('path');
 const controller = {}; 
 const { Sequelize, DataTypes, models } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
-try {
-  sequelize.authenticate();
-  console.log('Connectioon.');
-} catch (error) {
-  console.error('Unable to connect to the database', error);
-}
+
 //model
-
-
 const raison = require('../models').raisons;
 
 
