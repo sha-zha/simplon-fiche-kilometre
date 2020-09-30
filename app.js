@@ -1,72 +1,128 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const path        = require('path');
+const express     = require('express');
+const expressApp  = express();
+const http        = require('http').Server(expressApp);
 const { Sequelize } = require('sequelize');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const sqlite3 = require("sqlite3").verbose();
+// Get all models
+// const Entities            = require('./models/entities');
+// const Persons             = require('./models/persons');
+// const Vehicles            = require('./models/vehicles');
+// const KilometerSheets     = require('./models/kilometersheets');
+// const KilometerSheetRows  = require('./models/kilometersheetrows');
+const raison         = require('./models/raison');
+// const PersonsVehicles     = require('./models/personsVehicles');
+// const PersonsWorkFors     = require('./models/personsworkfors');
 
-var app = express();
+// Routes handler
+const index = require('./routes/index');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './bdd/bdd.sqlite'
-});
+/* variable initialisation's */
+const router = {
+  isStarted: false
+};
 
 
-var apps = {};
-
+/**
+ * Starting web server on port 3000
+ * 
+ * When we start we create tables in database if not exist
+ * @param {*} callback 
+ */
 function start(callback) {
-    init(function() {
-        /* On démarre le routeur défini juste avant */
-        apps.router.start(function() {
-            if(typeof callback != 'undefined') {
+  if (router.isStarted === false) {
+    init(function () {
+
+      // Handle routes function
+      loadRoutes(function () {
+
+        // setup relations
+        // 1 person can work for many entities
+        // Persons.belongsToMany(Entities, { through: PersonsWorkFors });
+        // Entities.belongsToMany(Persons, { through: PersonsWorkFors });
+
+        // 1 person can have many vehicles
+        // Persons.belongsToMany(Vehicles, {through: PersonsVehicles});
+        // Vehicles.belongsToMany(Persons, {through: PersonsVehicles});
+
+        // 1 person can have many kilometerSheet
+        // 1 Entity can have many kilometerSheet
+        // 1 vehicles can have many kilometerSheet
+        // Persons.hasMany(KilometerSheets);
+        // Entities.hasMany(KilometerSheets);
+        // Vehicles.hasMany(KilometerSheets);
+
+        // 1 kilometerSheet can have many kilometersheetrows
+        // KilometerSheets.hasMany(KilometerSheetRows);
+
+        // 1 kilometersheetrows can have many moveReason
+        // MoveReasons.hasMany(KilometerSheetRows);
+
+
+
+        // //créer la bdd 
+        // const db_name = path.join(__dirname, "bdd", "fiche-kilometre");
+        // const db = new sqlite3.Database(db_name, err => {
+        //   if (err) {
+        //     return console.error(err.message);
+        //   }
+        //   console.log("la base de données 'apptest.db'");
+        // });
+
+
+            // starting web server
+            http.listen(3000, function () {
+              console.log('Application is running on port 3000');
+              router.isStarted = true;
+              if (typeof callback != 'undefined') {
                 callback();
-            }
-        });
+              }
+            });
+
+          // });
+      });
     });
-}
- 
-function init(callback) {
-    /* On instancie notre module router */
-    apps.router = require('./router');
- 
-    if(typeof callback != 'undefined') {
-        callback();
+  } else {
+    console.log("Application already started");
+    if (typeof callback != 'undefined') {
+      callback();
     }
+  }
 }
 
-module.exports = app; 
+
+/**
+ * Initialisation of view engine and others parameters
+ * @param {*} callback 
+ */
+function init(callback) {
+
+  /** view engine setup*/
+  expressApp.set('views', path.join(__dirname, 'views'));
+  expressApp.set('view engine', 'ejs');
+  
+  expressApp.use(express.json());
+  expressApp.use(express.urlencoded({ extended: false }));
+  expressApp.use(express.static(path.join(__dirname, 'public')));
+
+  /* Keep server down */
+  router.isStarted = false;
+  if (typeof callback != 'undefined') {
+    callback();
+  }
+}
+
+/**
+ * Route's management
+ * @param {*} callback 
+ */
+function loadRoutes(callback) {
+  expressApp.use("/", index);
+  if (typeof callback != 'undefined') {
+    callback();
+  }
+}
+
 module.exports = {
-    start: start
+  start: start
 };
