@@ -1,0 +1,26 @@
+<%  include includes/header %> 
+
+<main class="container">
+	<section class="row">
+		<form action="/affecteEntite" method="POST">
+			<label for="individu">Choisir un individu</label>
+			<select name="individu" id="individu" class="form-control">
+				<option value="">Choisir un individu</option>
+				<% individu.forEach(function (individu) { %>
+				<option value="<%= individu.id %>"><%= individu.nom %> <%= individu.prenom%> <%= individu.email %></option>
+				<% })%>
+			</select>
+			<label for="entite">Choisir une entité</label>
+			<select name="entite" id="entite" class="form-control">
+				<option value="">Choisir une entité</option>
+				<% entite.forEach(function (entite) { %>
+				<option value="<%= entite.id %>"><%= entite.type %> <%= entite.nom%> </option>
+				<% })%>
+			</select>
+
+			<input type="submit" class="btn btn-primary" value="Affecter">
+		</form>
+	</section>
+</main>
+</body>
+</html>

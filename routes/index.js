@@ -11,6 +11,7 @@ const raisonController = require('../controllers/raisonController');
 const entiteController = require('../controllers/entiteController');
 const vehiculeController = require('../controllers/vehiculeController');
 const vehiculeIndividuController = require ('../controllers/vehiculeIndividuController');
+const entitesIndividusController = require('../controllers/entitesIndividusController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,18 +44,24 @@ router.post('/addVehicule',vehiculeController.addVehicule)
 
 // liste vehicule
 
-router.get('/liste-vehicule', vehiculeController.show)
+router.get('/liste-vehicule', vehiculeController.show);
 
 //affiche un form pour ajouter individu
-router.get('/individu',individuController.individu)
+router.get('/individu',individuController.individu);
 
 //ajout un individu
-router.post('/addIndividu',individuController.addIndividu)
+router.post('/addIndividu',individuController.addIndividu);
 
 //form affecte vehicule
 router.get('/affecteVehicule', vehiculeIndividuController.vehiculeIndividu);
 
 //ajout affectation vehicule
-router.post('/affecteVehicule', vehiculeIndividuController.add)
+router.post('/affecteVehicule', vehiculeIndividuController.add);
+
+//form affectation entite
+router.get('/affecteEntite',entitesIndividusController.index);
+
+//ajout affectation entite
+router.post('/affecteEntite', entitesIndividusController.add);
 
 module.exports = router;
