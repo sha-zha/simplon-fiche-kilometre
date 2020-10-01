@@ -10,6 +10,8 @@ const individuController = require('../controllers/individuController');
 const raisonController = require('../controllers/raisonController');
 const entiteController = require('../controllers/entiteController');
 const vehiculeController = require('../controllers/vehiculeController');
+const vehiculeIndividuController = require ('../controllers/vehiculeIndividuController');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express et electron' });
@@ -48,4 +50,11 @@ router.get('/individu',individuController.individu)
 
 //ajout un individu
 router.post('/addIndividu',individuController.addIndividu)
+
+//form affecte vehicule
+router.get('/affecteVehicule', vehiculeIndividuController.vehiculeIndividu);
+
+//ajout affectation vehicule
+router.post('/affecteVehicule', vehiculeIndividuController.add)
+
 module.exports = router;

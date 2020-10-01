@@ -1,0 +1,26 @@
+<%  include includes/header %> 
+
+<main class="container">
+	<section class="row">
+		<form action="/affecteVehicule" method="POST">
+			<label for="individu">Choisir un individu</label>
+			<select name="individu" id="individu" class="form-control">
+				<option value="">Choisir un individu</option>
+				<% individu.forEach(function (individu) { %>
+				<option value="<%= individu.id %>"><%= individu.nom %> <%= individu.prenom%> <%= individu.email %></option>
+				<% })%>
+			</select>
+			<label for="vehicule">Choisir un véhicule</label>
+			<select name="vehicule" id="vehicule" class="form-control">
+				<option value="">Choisir un véhicule</option>
+				<% vehicule.forEach(function (vehicule) { %>
+				<option value="<%= vehicule.id %>"><%= vehicule.marque %> <%= vehicule.modele%> <%= vehicule.immatriculation %></option>
+				<% })%>
+			</select>
+
+			<input type="submit" class="btn btn-primary" value="Affecter">
+		</form>
+	</section>
+</main>
+</body>
+</html>
