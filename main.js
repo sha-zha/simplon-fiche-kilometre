@@ -7,7 +7,7 @@ function createWindow() {
     /* Créer une fenêtre de 800px par 600px sans bordures */
     window = new electron.BrowserWindow({
         width: 800,
-        height: 600,
+        height: 700,
         frame: false
     });
  

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href="/stylesheets/bootstrap.min.css">
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <header class="header">
+      <nav class="nav">
+        <ul>
+          <li><a href="/liste">Liste de Raison</a></li>
+          <li><a href="/update">Editer</a></li>
+        </ul>
+      </nav>
+      
+    </header>
+   <main class="container">
+   	<section class="row">
+   		<div class="col-12">
+   			<h2 class="text-center">Editer une raison</h2>
+   		</div>
+   		<div class="card col-12">
+   			<form action="/updateRaison/<%= raison.id %>" method="POST" class="form">
+   				<label for="raison">Editer un objet de déplacement : </label>
+   				<input type="text" name="raison" class="form-control" id="raison" value="<%= raison.label %>">
+   				<input type="submit" class="btn btn-primary">
+   			</form>
+   		</div>
+   	</section>
+   </main>
+  </body>
+</html>

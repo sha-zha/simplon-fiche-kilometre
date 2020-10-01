@@ -8,7 +8,8 @@ const sqlite3 = require("sqlite3").verbose();
 //controllers
 const individuController = require('../controllers/individuController');
 const raisonController = require('../controllers/raisonController');
-
+const entiteController = require('../controllers/entiteController');
+const vehiculeController = require('../controllers/vehiculeController');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express et electron' });
@@ -27,5 +28,24 @@ router.get('/update/:id',raisonController.update)
 router.post('/updateRaison/:id', raisonController.updateRaison)
 
 //affiche form pour ajouter une entite
-// router.get('/entite', entiteController.add)
+router.get('/entite', entiteController.entite)
+
+//ajout une entite
+router.post('/addEntite',entiteController.addEntite)
+
+//affiche form pour ajouter vehicule 
+router.get('/vehicule', vehiculeController.vehicule)
+
+//ajout un véhicule 
+router.post('/addVehicule',vehiculeController.addVehicule)
+
+// liste vehicule
+
+router.get('/liste-vehicule', vehiculeController.show)
+
+//affiche un form pour ajouter individu
+router.get('/individu',individuController.individu)
+
+//ajout un individu
+router.post('/addIndividu',individuController.addIndividu)
 module.exports = router;

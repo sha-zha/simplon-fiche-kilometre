@@ -1,0 +1,18 @@
+<%  include includes/header %> 
+   <main class="container">
+   	<section class="row">
+   		<div class="col-12">
+   		
+   	    <ul>
+       
+          <%  raison.forEach(function(raison) { %>
+          <li><%= raison.id %> - <%= raison.label %> <a href="/update/<%= raison.id %>">Lien pour éditer</a></li>
+         <%  }) %>
+
+        </ul>
+   		
+   		</div>
+   	</section>
+   </main>
+  </body>
+</html>

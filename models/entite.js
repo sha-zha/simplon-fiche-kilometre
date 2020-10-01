@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     type_entite: DataTypes.STRING,
     nom: DataTypes.STRING
   }, {
-  	tableName: 'raisons',
+  	tableName: 'entites',
     timestamps: false
   });
   entite.associate = function(models) {

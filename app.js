@@ -4,15 +4,7 @@ const expressApp  = express();
 const http        = require('http').Server(expressApp);
 const { Sequelize } = require('sequelize');
 const sqlite3 = require("sqlite3").verbose();
-// Get all models
-// const Entities            = require('./models/entities');
-// const Persons             = require('./models/persons');
-// const Vehicles            = require('./models/vehicles');
-// const KilometerSheets     = require('./models/kilometersheets');
-// const KilometerSheetRows  = require('./models/kilometersheetrows');
-const raison         = require('./models/raison');
-// const PersonsVehicles     = require('./models/personsVehicles');
-// const PersonsWorkFors     = require('./models/personsworkfors');
+
 
 // Routes handler
 const index = require('./routes/index');
@@ -35,39 +27,6 @@ function start(callback) {
 
       // Handle routes function
       loadRoutes(function () {
-
-        // setup relations
-        // 1 person can work for many entities
-        // Persons.belongsToMany(Entities, { through: PersonsWorkFors });
-        // Entities.belongsToMany(Persons, { through: PersonsWorkFors });
-
-        // 1 person can have many vehicles
-        // Persons.belongsToMany(Vehicles, {through: PersonsVehicles});
-        // Vehicles.belongsToMany(Persons, {through: PersonsVehicles});
-
-        // 1 person can have many kilometerSheet
-        // 1 Entity can have many kilometerSheet
-        // 1 vehicles can have many kilometerSheet
-        // Persons.hasMany(KilometerSheets);
-        // Entities.hasMany(KilometerSheets);
-        // Vehicles.hasMany(KilometerSheets);
-
-        // 1 kilometerSheet can have many kilometersheetrows
-        // KilometerSheets.hasMany(KilometerSheetRows);
-
-        // 1 kilometersheetrows can have many moveReason
-        // MoveReasons.hasMany(KilometerSheetRows);
-
-
-
-        // //créer la bdd 
-        // const db_name = path.join(__dirname, "bdd", "fiche-kilometre");
-        // const db = new sqlite3.Database(db_name, err => {
-        //   if (err) {
-        //     return console.error(err.message);
-        //   }
-        //   console.log("la base de données 'apptest.db'");
-        // });
 
 
             // starting web server
