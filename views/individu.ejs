@@ -1,0 +1,26 @@
+<%  include includes/header %> 
+
+<main class="container">
+	<section class="row">
+		<form action="/addIndividu" method="POST" class="col-12">
+			<label for="nom">Nom</label>
+			<input type="text" id="nom" name="nom" class="form-control">
+			<label for="prenom">Prénom</label>
+			<input type="text" id="prenom" name="prenom" class="form-control">
+
+			<label for="email">Email</label>
+			<input type="email" name="email" class="form-control">
+
+			<label for="password">Mot de passe</label>
+			<input type="password" id="password" class="form-control" name="password">
+
+			<label for="fonction">Fonction</label>
+			<input type="text" id="fonction" class="form-control" name="fonction">
+
+
+			<input type="submit" class="btn btn-primary" value="Ajouter">
+
+			
+		</form>
+	</section>
+</main>
