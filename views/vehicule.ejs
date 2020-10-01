@@ -1,0 +1,25 @@
+<%  include includes/header %> 
+
+<main class="container">
+	<section class="row">
+		<form action="/addVehicule" method="POST" class="col-12">
+			<label for="marque">Marque</label>
+			<input type="text" id="marque" name="marque" class="form-control">
+
+			<label for="modele">Modèle</label>
+			<input type="text" id="modele" name="modele" class="form-control">
+
+			<label for="immatriculation">Immatriculation</label>
+			<input type="text" name="immatriculation" class="form-control" id="immatriculation">
+			<label for="annee">Annee</label>
+			<input type="date" name="annee" id="annee" class="form-control">
+			<label>Puissance du véhicule</label>
+			<input type="radio" name="puissance" class="form-control" value="3CV ou moins"> 3CV
+			<input type="radio" name="puissance" class="form-control" value="7CV ou plus"> 
+
+			<input type="submit" class="btn btn-primary" value="Ajouter">
+
+			
+		</form>
+	</section>
+</main>

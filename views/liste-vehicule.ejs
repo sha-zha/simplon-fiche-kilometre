@@ -1,0 +1,21 @@
+<%  include includes/header %> 
+
+   <main class="container">
+   	<section class="row">
+   		<div class="col-12">
+   		
+   	    <ul>
+       
+          <%  vehicule.forEach(function(vehicule) { %>
+
+          <li><%= vehicule.marque %></li>
+          <li><%= vehicule.puissance%></li>
+         <%  }) %>
+
+        </ul>
+   		
+   		</div>
+   	</section>
+   </main>
+  </body>
+</html>
