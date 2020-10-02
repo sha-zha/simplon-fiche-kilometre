@@ -1,0 +1,77 @@
+<%  include includes/header %> 
+
+<main class="container">
+	<section class="row">
+		<form action="/fiche" method="POST" class="col-12">
+			<label for="individu">Choisir un individu</label>
+			<select name="individu" id="individu" class="form-control">
+				<option value="">Choisir un individu</option>
+				<% individu.forEach(function (individu) { %>
+				<option value="<%= individu.id %>"><%= individu.nom %> <%= individu.prenom%> <%= individu.email %></option>
+				<% })%>
+			</select>
+
+			<label for="vehicule">Choisir un véhicule</label>
+			<select name="vehicule" id="vehicule" class="form-control">
+				<option value="">Choisir un véhicule</option>
+				<% vehicule.forEach(function (vehicule) { %>
+				<option value="<%= vehicule.id %>"><%= vehicule.marque %> <%= vehicule.modele%> <%= vehicule.immatriculation%></option>
+				<% })%>
+			</select>
+			<label for="raison">Choisir une raison de déplacement</label>
+			<select name="raison" id="raison" class="form-control">
+				<option value="">Choisir une raison de dééplacement</option>
+				<% raison.forEach(function (raison) { %>
+				<option value="<%= raison.id %>"><%= raison.label %></option>
+				<% })%>
+			</select>
+			<label for="arivee">Nombre de kilometre à l'arrivée</label>
+			<input type="number" id="arivee" class="form-control" onkeyup="myFunction()">
+
+			<label> Nombre de kilométrage au départ</label>
+			<input type="number" name="depart" class="form-control" id="depart" onkeyup="myFunction()">
+			<label for="dates">Date</label>
+			<input type="date" class="form-control" id="dates" name="date">
+
+			<input type="hidden" name="distance" id="distance">
+			<input type="hidden" name="total" id="total">
+			<p id="affiche-distance">Distance Parcourru : </p>
+			<p id="affiche-total">Total kilomètre : </p>
+			<input type="submit" class="btn btn-primary" value="Ajouter">
+		
+		</form>
+	</section>
+</main>
+<script src="/javascripts/jquery.min.js"></script>
+<script>
+function myFunction() {
+  const depart = document.getElementById('depart');
+  const arivee = document.getElementById('arivee');
+  const afficheDistance = document.getElementById('affiche-distance');
+  const distance = document.getElementById('distance');
+
+  const result = arivee.value - depart.value;
+
+ afficheDistance.innerHTML = 'Distance parcourrue : '+result;
+ distance = result;
+}
+   $("form").on('change', function(e){
+        e.preventDefault();
+
+        var individu = document.getElementById('individu').value;
+        var vehicule = document.getElementById('vehicule').value;
+        var data = {
+             individu: individu, 
+             vehicule: vehicule
+         };
+        $.ajax({
+            type: 'POST',
+            url: '/ajax',
+            data: data,
+            dataType: 'json',
+            success : function (result) {
+                alert('je suis un result')
+            }
+        })
+    });
+</script>
