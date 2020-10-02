@@ -6,6 +6,11 @@ const { Sequelize, DataTypes, models } = require('sequelize');
 const raison = require('../models').raisons;
 
 
+controller.add = async(req,res,next ) =>{
+
+	res.render('ajout',{title : 'Ajouter une raison'});
+}
+
 controller.addRaison= async (req, res, next) => {
 
 	const addRaison = await raison.create({label: req.body.raison});
@@ -51,5 +56,19 @@ controller.updateRaison = async (req, res, next) => {
 	var select = await  raison.findAll({raw: true});
 
 	res.render('liste',{title : 'la  liste', raison : select });
+}
+
+controller.delete = async(req,res,next) =>{
+	var id = req.params.id; 
+
+	//to do verification 
+
+	const sup = await raison.destroy({
+	  where: {
+	    id : id
+	  }
+	});
+
+	res.render('index', {title: 'ajout une raison'})
 }
 module.exports = controller;

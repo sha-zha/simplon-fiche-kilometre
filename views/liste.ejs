@@ -6,7 +6,7 @@
    	    <ul>
        
           <%  raison.forEach(function(raison) { %>
-          <li><%= raison.id %> - <%= raison.label %> <a href="/update/<%= raison.id %>">Lien pour éditer</a></li>
+          <li><%= raison.id %> - <%= raison.label %> <a href="/update/<%= raison.id %>">Lien pour éditer</a> <a href="/delete/raison/<%=raison.id%>"  onclick="return confirm('Souhaitez-vous vraiment Supprimer cette raison?');">Supprimer cette raison</a></li>
          <%  }) %>
 
         </ul>

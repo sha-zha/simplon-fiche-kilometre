@@ -12,11 +12,18 @@ const entiteController = require('../controllers/entiteController');
 const vehiculeController = require('../controllers/vehiculeController');
 const vehiculeIndividuController = require ('../controllers/vehiculeIndividuController');
 const entitesIndividusController = require('../controllers/entitesIndividusController');
+const ficheController = require('../controllers/ficheController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express et electron' });
 });
+
+//login
+router.post('/login', individuController.login);
+
+//form ajout raison
+router.get('/ajout', raisonController.add); 
 
 //ajout une raison
 router.post('/addRaison',raisonController.addRaison);
@@ -64,4 +71,15 @@ router.get('/affecteEntite',entitesIndividusController.index);
 //ajout affectation entite
 router.post('/affecteEntite', entitesIndividusController.add);
 
+//delete raison
+router.get('/delete/raison/:id', raisonController.delete);
+
+//get fiche
+router.get('/fiche',ficheController.show)
+
+//deco
+router.get('/logout',individuController.logout)
+
+//ajax fiche 
+router.post('/ajax', ficheController.total)
 module.exports = router;

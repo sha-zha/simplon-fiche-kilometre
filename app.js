@@ -4,7 +4,8 @@ const expressApp  = express();
 const http        = require('http').Server(expressApp);
 const { Sequelize } = require('sequelize');
 const sqlite3 = require("sqlite3").verbose();
-
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 
 // Routes handler
 const index = require('./routes/index');
@@ -63,6 +64,16 @@ function init(callback) {
   expressApp.use(express.json());
   expressApp.use(express.urlencoded({ extended: false }));
   expressApp.use(express.static(path.join(__dirname, 'public')));
+  // Simple session
+  expressApp.use(
+  session({
+    name: 'auth',
+    secret: 'fiche-metier',
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
 
   /* Keep server down */
   router.isStarted = false;

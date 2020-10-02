@@ -1,6 +1,8 @@
 const path        = require('path');
 const controller = {}; 
 const { Sequelize, DataTypes, models } = require('sequelize');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 
 //model
 const individus = require('../models').individu;
@@ -32,4 +34,39 @@ controller.addIndividu = async(req,res,next) =>{
 	console.log('individu bien ajouté')
 }
 
+//se connecter 
+
+controller.login = async(req,res) =>{
+	var email = req.body.email;
+	var mdp = req.body.password;
+
+	// to do : verification 
+
+	const login = await individus.findOne({ 
+		where:{email : email}, 
+		 raw: true
+	});
+	console.log(login)
+	if( login != null ){
+		if(mdp == login.password){
+			req.session.user = login.id; 
+
+			console.log(req.session)
+			return req.session.save(err => {
+                res.redirect('/ajout');
+            });
+		}
+	}
+}
+
+//déconnexion
+
+controller.logout = (req, res, next) =>{
+    req.session.destroy((err) => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/');
+    });
+};
 module.exports = controller;
