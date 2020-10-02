@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "fiche-kilometre",
+    "host": "127.0.0.1",
+    "dialect": "sqlite",
+    "storage": "./bdd/fiche-kilometre"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "fiche-kilometre",
+    "host": "127.0.0.1",
+     "dialect": "sqlite",
+    "storage": "./bdd/fiche-kilometre"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "fiche-kilometre",
+    "host": "127.0.0.1",
+    "dialect": "sqlite",
+    "storage": "./bdd/fiche-kilometre"
+  }
+}
