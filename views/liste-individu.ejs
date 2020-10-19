@@ -1,0 +1,20 @@
+<%  include includes/header %> 
+
+   <main class="container">
+   	<section class="row">
+   		<div class="col-12">
+   		
+   	    <ul>
+       
+          <%  individu.forEach(function(individu) { %>
+          <li><%= individu.nom %> <%= individu.prenom %> <%= individu.email%></li>
+
+         <%  }) %>
+
+        </ul>
+   		
+   		</div>
+   	</section>
+   </main>
+  </body>
+</html>

@@ -59,6 +59,9 @@ router.get('/individu',individuController.individu);
 //ajout un individu
 router.post('/addIndividu',individuController.addIndividu);
 
+//liste iindividu
+router.get('/liste-individu',individuController.show);
+
 //form affecte vehicule
 router.get('/affecteVehicule', vehiculeIndividuController.vehiculeIndividu);
 

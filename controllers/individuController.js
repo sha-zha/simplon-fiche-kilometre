@@ -7,6 +7,14 @@ const FileStore = require('session-file-store')(session);
 //model
 const individus = require('../models').individu;
 
+
+//liste des individus
+controller.show = async (req, res, next ) =>{
+	let liste = await individus.findAll({raw:true});
+
+	res.render('liste-individu',{title: 'liste des individus', individu : liste});
+}
+
 controller.individu = async(req,res,next) =>{
 	res.render('individu', {title: 'créer un individu'})
 }
