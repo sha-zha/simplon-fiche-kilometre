@@ -43,6 +43,9 @@ router.get('/entite', entiteController.entite)
 //ajout une entite
 router.post('/addEntite',entiteController.addEntite)
 
+//liste entite
+router.get('/liste-entite',entiteController.show);
+
 //affiche form pour ajouter vehicule 
 router.get('/vehicule', vehiculeController.vehicule)
 
@@ -50,7 +53,6 @@ router.get('/vehicule', vehiculeController.vehicule)
 router.post('/addVehicule',vehiculeController.addVehicule)
 
 // liste vehicule
-
 router.get('/liste-vehicule', vehiculeController.show);
 
 //affiche un form pour ajouter individu

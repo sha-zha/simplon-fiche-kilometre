@@ -21,16 +21,25 @@ controller.show = async(req,res) =>{
 }
 
 controller.total = async(req,res) =>{
-	// var individu = req.body.individu;
-	// var vehicule = req.body.vehicule;
+	var individu = req.body.individu;
+	var vehicule = req.body.vehicule;
 
-	// var total = await fiches.findAll({
-	// 	where: {id_individu : individu, id_vehicule : vehicule }, raw:true
-	// })
-	// console.log(total)
+	var total = await fiches.findAll({
+		where: {id_individu : individu, id_vehicule : vehicule }, raw:true
+	})
+	console.log(total)
+	var json = res.json(total);
+	//tableau km
+	var km = [];
 
-const {individu, vehicule} = req.body
-console.log(req.body.individu)
+    for (var i = 0; i < total.length; i++){
+	km.push(total[i].totalkm)	
+	}
+
+	console.log(km)
+    
+	// var total = [{individu : 1, vehicule: 1}]
+	// console.log( res.json(total) ) 
 
 }
 

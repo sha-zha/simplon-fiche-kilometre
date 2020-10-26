@@ -5,6 +5,13 @@ const { Sequelize, DataTypes, models } = require('sequelize');
 //model
 const entites = require('../models').entite;
 
+
+controller.show = async(req,res,next) =>{
+	let liste = await entites.findAll({raw:true});
+
+	res.render('liste-entite',{title: 'la liste des entités', entite : liste });
+}
+
 /*
 *ajouter une entite
 */
